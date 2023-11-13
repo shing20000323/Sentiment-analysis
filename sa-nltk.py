@@ -19,15 +19,17 @@ visualise_sentiments({
 
 #predict the sentiment of the review in reviews.csv
 import pandas as pd
-df_reviews = pd.read_csv('reviews.csv')
+
+import matplotlib.pyplot as plt
+df_reviews = pd.read_csv('reviews-cleaned.csv')
 df_reviews['Sentiment'] = df_reviews['Description'].apply(lambda x: sid.polarity_scores(x)["compound"])
-df_reviews.to_csv('reviews-sentiment-nltk.csv', index=False)
+
 print(df_reviews)
 #plotting the sentiment of the review
 
-import matplotlib.pyplot as plt
 df_reviews['Sentiment'] = df_reviews['Description'].apply(lambda x: sid.polarity_scores(x)["compound"])
 df_reviews['Subjectivity'] = df_reviews['Description'].apply(lambda x: sid.polarity_scores(x)["pos"])
 plt.show()
 #show sid.polarity_scores(sentence)
 print(sid.polarity_scores(sentence))
+df_reviews.to_csv('reviews-sentiment-nltk.csv', index=False)
